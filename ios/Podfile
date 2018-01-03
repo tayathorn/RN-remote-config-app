@@ -8,6 +8,7 @@ target 'CustomAppOnTheFly' do
   # Pods for CustomAppOnTheFly
   # RNFirebase
   pod 'Firebase/Core'
+  pod 'Firebase/RemoteConfig'
 
 
   target 'CustomAppOnTheFlyTests' do
