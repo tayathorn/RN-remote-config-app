@@ -56,3 +56,4 @@ buck-out/
 
 # Personal config file
 GoogleService-Info.plist
+google-services.json
