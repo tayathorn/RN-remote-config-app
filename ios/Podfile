@@ -1,16 +1,14 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'CustomAppOnTheFly' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
   # Pods for CustomAppOnTheFly
+  # RNFirebase
+  pod 'Firebase/Core'
 
-  target 'CustomAppOnTheFly-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
   target 'CustomAppOnTheFlyTests' do
     inherit! :search_paths
