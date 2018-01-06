@@ -10,12 +10,22 @@ import {
 export default class App extends Component {
   state = {
     greetingMessage: 'Welcome !',
+    eventPicture: 'https://images.moviepilot.com/image/upload/c_fill,h_630,q_auto:best,w_1200/iloar0rvcsy1bhmpy0at.jpg',
+    isShowEventPicture: true,
+    buttonColor: '#6f1425',
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.state.greetingMessage}</Text>
+        <Text style={styles.welcome}>{this.state.greetingMessage}</Text>
+        {
+          this.state.isShowEventPicture &&
+          <Image style={styles.picture} source={{uri: this.state.eventPicture}} resizeMode={'cover'} />
+        }
+        <TouchableOpacity style={[styles.button, {backgroundColor: this.state.buttonColor}]}>
+          <Text style={styles.buttonTitle}>Fetch</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -26,16 +36,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  picture: {
+    height: 250,
+    width: 250,
+  },
+  button: {
+    width: 250,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+    padding: 10,
+    borderRadius: 10,
+  },
+  buttonTitle: {
+    color: 'white',
+    fontSize: 18,
   },
 });
