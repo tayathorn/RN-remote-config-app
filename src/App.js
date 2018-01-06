@@ -7,6 +7,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import firebase from 'react-native-firebase';
+
+import remoteConfigDefaults from './constant/remote_config_defaults';
+
+const firebaseRemoteConfig = firebase.config();
+
 export default class App extends Component {
   state = {
     greetingMessage: 'Welcome !',
@@ -14,6 +20,33 @@ export default class App extends Component {
     isShowEventPicture: true,
     buttonColor: '#6f1425',
   };
+
+  componentDidMount() {
+    // Set default values
+    firebaseRemoteConfig.setDefaults({
+      ...remoteConfigDefaults,
+    });
+
+    this.getRemoteValues();
+  }
+
+  getRemoteValues = () => {
+    const keys = ['greeting_message', 'event_picture', 'is_show_event_picture', 'button_color'];
+    firebaseRemoteConfig.getValues(keys)
+      .then((datas) => {
+        const greetingMessage = datas.greeting_message.val();
+        const eventPicture = datas.event_picture.val();
+        const isShowEventPicture = datas.is_show_event_picture.val();
+        const buttonColor = datas.button_color.val();
+
+        this.setState({
+          greetingMessage,
+          eventPicture,
+          isShowEventPicture,
+          buttonColor,
+        });
+      });
+  }
 
   render() {
     return (
