@@ -5,6 +5,7 @@
 # Xcode
 #
 build/
+Pods/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -51,3 +52,8 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+
+
+# Personal config file
+GoogleService-Info.plist
+google-services.json
