@@ -38,13 +38,12 @@ export default class App extends Component {
     const cacheExpiration = __DEV__ ? 0 : 3600;  // 1 hour
 
     firebaseRemoteConfig.fetch(cacheExpiration)
-      .then((res) => firebaseRemoteConfig.activateFetched())
+      .then(() => firebaseRemoteConfig.activateFetched())
       .then((activated) => {
         if (!activated) console.log('Fetched data not activated');
         return firebaseRemoteConfig.getValues(keys);
       })
       .then((datas) => {
-        console.log('datas : ', datas)
         const greetingMessage = datas.greeting_message.val();
         const eventPicture = datas.event_picture.val();
         const isShowEventPicture = datas.is_show_event_picture.val();
