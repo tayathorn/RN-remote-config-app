@@ -46,32 +46,16 @@ export default class App extends Component {
 
   getRemoteValues = () => {
     const keys = ['greeting_message', 'event_picture', 'is_show_event_picture', 'button_color'];
-    const cacheExpiration = __DEV__ ? 0 : 3600;  // 1 hour
+    // const cacheExpiration = __DEV__ ? 0 : 3600;  // 1 hour
 
-    firebaseRemoteConfig.fetch(cacheExpiration)
-      .then((res) => firebaseRemoteConfig.activateFetched())
-      .then((activated) => {
-        if (!activated) console.log('Fetched data not activated');
-        return firebaseRemoteConfig.getValues(keys);
-      })
-      .then((datas) => {
-        console.log('datas : ', datas)
-        const greetingMessage = datas.greeting_message.val();
-        const eventPicture = datas.event_picture.val();
-        const isShowEventPicture = datas.is_show_event_picture.val();
-        const buttonColor = datas.button_color.val();
-
-        this.setState({
-          greetingMessage,
-          eventPicture,
-          isShowEventPicture,
-          buttonColor,
-        });
-      })
-      .catch((error) => console.log('err : ', error) )
-
-    // firebaseRemoteConfig.getValues(keys)
+    // firebaseRemoteConfig.fetch(cacheExpiration)
+    //   .then((res) => firebaseRemoteConfig.activateFetched())
+    //   .then((activated) => {
+    //     if (!activated) console.log('Fetched data not activated');
+    //     return firebaseRemoteConfig.getValues(keys);
+    //   })
     //   .then((datas) => {
+    //     console.log('datas : ', datas)
     //     const greetingMessage = datas.greeting_message.val();
     //     const eventPicture = datas.event_picture.val();
     //     const isShowEventPicture = datas.is_show_event_picture.val();
@@ -83,7 +67,23 @@ export default class App extends Component {
     //       isShowEventPicture,
     //       buttonColor,
     //     });
-    //   });
+    //   })
+    //   .catch((error) => console.log('err : ', error) )
+
+    firebaseRemoteConfig.getValues(keys)
+      .then((datas) => {
+        const greetingMessage = datas.greeting_message.val();
+        const eventPicture = datas.event_picture.val();
+        const isShowEventPicture = datas.is_show_event_picture.val();
+        const buttonColor = datas.button_color.val();
+
+        this.setState({
+          greetingMessage,
+          eventPicture,
+          isShowEventPicture,
+          buttonColor,
+        });
+      });
   }
 
   render() {
@@ -95,7 +95,7 @@ export default class App extends Component {
           <Image style={styles.picture} source={{uri: this.state.eventPicture}} resizeMode={'cover'} />
         }
         <TouchableOpacity style={[styles.button, {backgroundColor: this.state.buttonColor}]}>
-          <Text style={styles.buttonTitle}>Fetch</Text>
+          <Text style={styles.buttonTitle}>Next</Text>
         </TouchableOpacity>
       </View>
     );
@@ -111,18 +111,19 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 25,
     textAlign: 'center',
-    margin: 10,
+    marginVertical: 20,
   },
   picture: {
     height: 250,
     width: 250,
+    marginVertical: 20,
   },
   button: {
     width: 250,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 10,
+    marginVertical: 20,
     padding: 10,
     borderRadius: 10,
   },
