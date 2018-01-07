@@ -23,7 +23,7 @@ export default class App extends Component {
 
   componentDidMount() {
     if (__DEV__) {
-      // firebaseRemoteConfig.enableDeveloperMode();
+      firebaseRemoteConfig.enableDeveloperMode();
     }
     // Set default values
     firebaseRemoteConfig.setDefaults({
@@ -33,45 +33,18 @@ export default class App extends Component {
     this.getRemoteValues();
   }
 
-  // setupRemoteConfig = () => {
-  //   if (__DEV__) {
-  //     firebaseRemoteConfig.enableDeveloperMode();
-  //   }
-
-  //   // Set default values
-  //   firebaseRemoteConfig.setDefaults({
-  //     ...remoteConfigDefaults,
-  //   });
-  // }
-
   getRemoteValues = () => {
     const keys = ['greeting_message', 'event_picture', 'is_show_event_picture', 'button_color'];
-    // const cacheExpiration = __DEV__ ? 0 : 3600;  // 1 hour
+    const cacheExpiration = __DEV__ ? 0 : 3600;  // 1 hour
 
-    // firebaseRemoteConfig.fetch(cacheExpiration)
-    //   .then((res) => firebaseRemoteConfig.activateFetched())
-    //   .then((activated) => {
-    //     if (!activated) console.log('Fetched data not activated');
-    //     return firebaseRemoteConfig.getValues(keys);
-    //   })
-    //   .then((datas) => {
-    //     console.log('datas : ', datas)
-    //     const greetingMessage = datas.greeting_message.val();
-    //     const eventPicture = datas.event_picture.val();
-    //     const isShowEventPicture = datas.is_show_event_picture.val();
-    //     const buttonColor = datas.button_color.val();
-
-    //     this.setState({
-    //       greetingMessage,
-    //       eventPicture,
-    //       isShowEventPicture,
-    //       buttonColor,
-    //     });
-    //   })
-    //   .catch((error) => console.log('err : ', error) )
-
-    firebaseRemoteConfig.getValues(keys)
+    firebaseRemoteConfig.fetch(cacheExpiration)
+      .then((res) => firebaseRemoteConfig.activateFetched())
+      .then((activated) => {
+        if (!activated) console.log('Fetched data not activated');
+        return firebaseRemoteConfig.getValues(keys);
+      })
       .then((datas) => {
+        console.log('datas : ', datas)
         const greetingMessage = datas.greeting_message.val();
         const eventPicture = datas.event_picture.val();
         const isShowEventPicture = datas.is_show_event_picture.val();
@@ -83,7 +56,9 @@ export default class App extends Component {
           isShowEventPicture,
           buttonColor,
         });
-      });
+      })
+      .catch((error) => console.log('err : ', error) )
+
   }
 
   render() {
@@ -107,6 +82,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FAFAFA',
+    borderWidth: 1,
   },
   welcome: {
     fontSize: 25,
