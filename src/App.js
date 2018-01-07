@@ -24,7 +24,7 @@ export default class App extends Component {
           <Image style={styles.picture} source={{uri: this.state.eventPicture}} resizeMode={'cover'} />
         }
         <TouchableOpacity style={[styles.button, {backgroundColor: this.state.buttonColor}]}>
-          <Text style={styles.buttonTitle}>Fetch</Text>
+          <Text style={styles.buttonTitle}>Next</Text>
         </TouchableOpacity>
       </View>
     );
