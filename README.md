@@ -2,6 +2,9 @@
 
 Starter Project for Firebase Remote Config x React Native
 
+## Blog
+Medium: [มาลองใช้ Firebase Remote Config ใน React Native กัน](https://engineering.thinknet.co.th/react-native-firebase-remote-config-ede309bb752d)
+
 
 ## Completed Project
 checkout at branch `get_server_parameter` 
@@ -13,3 +16,6 @@ checkout at branch `get_server_parameter`
 
 ## Screenshot
 ![](https://image.ibb.co/ivLj1b/Simulator_Screen_Shot_i_Phone_6_2018_01_07_at_20_29_30.png)
+
+
+
